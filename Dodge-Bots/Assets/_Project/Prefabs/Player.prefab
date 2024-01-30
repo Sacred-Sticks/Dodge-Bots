@@ -225,4 +225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
+  jumpHeight: 1
   movementInput: {fileID: 11400000, guid: 47bf0e7a2e0e31b4ca4ecd05544c2744, type: 2}
+  jumpInput: {fileID: 11400000, guid: 7915f1116f397914e9d1d0c2cb56983b, type: 2}

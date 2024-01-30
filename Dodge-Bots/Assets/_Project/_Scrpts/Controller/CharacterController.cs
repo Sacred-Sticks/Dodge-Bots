@@ -6,12 +6,14 @@ namespace Dodge_Bots
     public class CharacterController : Observable
     {
         [SerializeField] private float movementSpeed;
+        [SerializeField] private float jumpHeight;
         
         // Cached References & Constant Values
         protected Rigidbody body;
         private const float tolerance = 0.25f;
         private const float movementForce = 50;
         private float speedSquared;
+        private float jumpVelocity;
         
         #region UnityEvents
         private void Awake()
@@ -22,6 +24,7 @@ namespace Dodge_Bots
         private void Start()
         {
             speedSquared = movementSpeed * movementSpeed;
+            jumpVelocity = Mathf.Sqrt(Mathf.Abs(jumpHeight * Physics.gravity.y * 2));
         }
         #endregion
 
@@ -32,6 +35,11 @@ namespace Dodge_Bots
             if (Mathf.Abs(directioAccuracy - 1) < tolerance && body.velocity.sqrMagnitude > speedSquared)
                 return;
             body.AddForce(direction * movementForce, ForceMode.Acceleration);
+        }
+
+        protected void Jump()
+        {
+            body.AddForce(jumpVelocity * Vector3.up, ForceMode.VelocityChange);
         }
     }
 }
