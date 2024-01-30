@@ -10,9 +10,6 @@ namespace Dodge_Bots
         
         // Cached References & Constant Values
         protected Rigidbody body;
-        private const float tolerance = 0.25f;
-        private const float movementForce = 50;
-        private float speedSquared;
         private float jumpVelocity;
         
         #region UnityEvents
@@ -23,7 +20,6 @@ namespace Dodge_Bots
 
         private void Start()
         {
-            speedSquared = movementSpeed * movementSpeed;
             jumpVelocity = Mathf.Sqrt(Mathf.Abs(jumpHeight * Physics.gravity.y * 2));
         }
         #endregion
@@ -31,14 +27,14 @@ namespace Dodge_Bots
         protected void MoveTowards(Vector3 direction)
         {
             direction = (transform.right * direction.x + transform.forward * direction.z).normalized;
-            float directioAccuracy = Vector3.Dot(direction, body.velocity.normalized);
-            if (Mathf.Abs(directioAccuracy - 1) < tolerance && body.velocity.sqrMagnitude > speedSquared)
-                return;
-            body.AddForce(direction * movementForce, ForceMode.Acceleration);
+            var previousVelocity = Vector3.ProjectOnPlane(body.velocity, Vector3.up);
+            var velocityChange = direction * movementSpeed - previousVelocity;
+            body.AddForce(velocityChange, ForceMode.VelocityChange);
         }
 
         protected void Jump()
         {
+            // Add Ground Detection & Jump Delay
             body.AddForce(jumpVelocity * Vector3.up, ForceMode.VelocityChange);
         }
     }

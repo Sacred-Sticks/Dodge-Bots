@@ -40,6 +40,7 @@ namespace Dodge_Bots
         private void FixedUpdate()
         {
             MoveTowards(rawMovementInput);
+            Debug.Log(body.velocity.magnitude);
         }
         #endregion
     }
