@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0ac5c3b-987f-4b71-9c10-61c4909534ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Dodge-Bots/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Dodge-Bots/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Controller/CharacterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Controller/CharacterController.cs" afterDir="false" />
-    </list>
+    <list default="true" id="b0ac5c3b-987f-4b71-9c10-61c4909534ac" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +95,7 @@
       <updated>1706592724411</updated>
       <workItem from="1706592726876" duration="148000" />
       <workItem from="1706592984599" duration="8148000" />
-      <workItem from="1706654869628" duration="6252000" />
+      <workItem from="1706654869628" duration="6844000" />
     </task>
     <servers />
   </component>
