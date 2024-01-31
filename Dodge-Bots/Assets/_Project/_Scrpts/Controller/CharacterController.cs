@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Kickstarter.Observer;
 using UnityEngine;
 
@@ -7,10 +8,16 @@ namespace Dodge_Bots
     {
         [SerializeField] private float movementSpeed;
         [SerializeField] private float jumpHeight;
+
+        protected bool isGrounded;
         
         // Cached References & Constant Values
         protected Rigidbody body;
         private float jumpVelocity;
+        private const float jumpDelay = 1.5f;
+        private const float radiusMultiplier = 0.5f;
+        private const float groundDistance = 1.5f;
+        private float groundRadius;
         
         #region UnityEvents
         private void Awake()
@@ -21,6 +28,8 @@ namespace Dodge_Bots
         private void Start()
         {
             jumpVelocity = Mathf.Sqrt(Mathf.Abs(jumpHeight * Physics.gravity.y * 2));
+            transform.root.TryGetComponent(out CapsuleCollider capsule);
+            groundRadius = capsule.radius * radiusMultiplier;
         }
         #endregion
 
@@ -32,10 +41,31 @@ namespace Dodge_Bots
             body.AddForce(velocityChange, ForceMode.VelocityChange);
         }
 
-        protected void Jump()
+        protected async void Jump()
         {
-            // Add Ground Detection & Jump Delay
-            body.AddForce(jumpVelocity * Vector3.up, ForceMode.VelocityChange);
+            CheckGrounded();
+            if (!isGrounded)
+                return;
+            float timer = 0;
+            int timeStep = (int)(Time.deltaTime * 1000);
+            while (timer < jumpDelay)
+            {
+                float yPosition = transform.position.y;
+                await Task.Delay(timeStep);
+                timer += Time.deltaTime;
+                if (transform.position.y < yPosition)
+                    continue;
+                body.AddForce(jumpVelocity * Vector3.up, ForceMode.VelocityChange);
+                break;
+            }
         }
+
+        private void CheckGrounded()
+        {
+            var ray = new Ray(transform.position + transform.up, -transform.up);
+            isGrounded = Physics.SphereCast(ray, groundRadius, groundDistance);
+        }
+        
+        
     }
 }
