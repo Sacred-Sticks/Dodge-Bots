@@ -16,7 +16,7 @@ namespace Dodge_Bots
         private float jumpVelocity;
         private const float jumpDelay = 1.5f;
         private const float radiusMultiplier = 0.5f;
-        private const float groundDistance = 1.5f;
+        private const float groundDistance = 1.125f;
         private float groundRadius;
         
         #region UnityEvents
@@ -43,21 +43,18 @@ namespace Dodge_Bots
 
         protected async void Jump()
         {
-            CheckGrounded();
-            if (!isGrounded)
-                return;
             float timer = 0;
             int timeStep = (int)(Time.deltaTime * 1000);
             while (timer < jumpDelay)
             {
-                float yPosition = transform.position.y;
-                await Task.Delay(timeStep);
+                CheckGrounded();
+                if (isGrounded)
+                    break;
                 timer += Time.deltaTime;
-                if (transform.position.y < yPosition)
-                    continue;
-                body.AddForce(jumpVelocity * Vector3.up, ForceMode.VelocityChange);
-                break;
+                await Task.Delay(timeStep);
             }
+            body.AddForce(-body.velocity.y * Vector3.up, ForceMode.VelocityChange);
+            body.AddForce(jumpVelocity * Vector3.up, ForceMode.VelocityChange);
         }
 
         private void CheckGrounded()
