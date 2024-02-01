@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0ac5c3b-987f-4b71-9c10-61c4909534ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Controller/CharacterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Controller/CharacterController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Trampolines/TrampolineCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Trampolines/TrampolineCollider.cs" afterDir="false" />
-    </list>
+    <list default="true" id="b0ac5c3b-987f-4b71-9c10-61c4909534ac" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,7 +96,7 @@
       <workItem from="1706592726876" duration="148000" />
       <workItem from="1706592984599" duration="8148000" />
       <workItem from="1706654869628" duration="6844000" />
-      <workItem from="1706742999563" duration="12275000" />
+      <workItem from="1706742999563" duration="12709000" />
     </task>
     <servers />
   </component>
@@ -110,24 +107,5 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/_Project/_Scrpts/Trampolines/Trampoline.cs</url>
-          <line>32</line>
-          <properties documentPath="C:\Users\Ackma\OneDrive\Documents\GitHub\Dodge-Bots\Dodge-Bots\Assets\_Project\_Scrpts\Trampolines\Trampoline.cs" initialLine="32" containingFunctionPresentation="Method 'Bounce'">
-            <startOffsets>
-              <option value="913" />
-            </startOffsets>
-            <endOffsets>
-              <option value="982" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
