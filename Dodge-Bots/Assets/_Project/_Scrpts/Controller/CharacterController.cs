@@ -1,4 +1,5 @@
-using System.Threading.Tasks;
+using System;
+using System.Collections;
 using Kickstarter.Observer;
 using UnityEngine;
 
@@ -10,13 +11,14 @@ namespace Dodge_Bots
         [SerializeField] private float jumpHeight;
 
         protected bool isGrounded;
+
+        private Coroutine trampolineRoutine;
         
         // Cached References & Constant Values
         protected Rigidbody body;
         private float jumpVelocity;
-        private const float jumpDelay = 1.5f;
         private const float radiusMultiplier = 0.5f;
-        private const float groundDistance = 1.125f;
+        private const float groundDistance = 1f;
         private float groundRadius;
         
         #region UnityEvents
@@ -40,20 +42,15 @@ namespace Dodge_Bots
             var velocityChange = direction * movementSpeed - previousVelocity;
             body.AddForce(velocityChange, ForceMode.VelocityChange);
         }
-
-        protected async void Jump()
+        
+        protected void Jump()
         {
-            float timer = 0;
-            int timeStep = (int)(Time.deltaTime * 1000);
-            while (timer < jumpDelay)
+            CheckGrounded();
+            if (!isGrounded)
             {
-                CheckGrounded();
-                if (isGrounded)
-                    break;
-                timer += Time.deltaTime;
-                await Task.Delay(timeStep);
+                NotifyObservers(new OnMidAirJump());
+                return;
             }
-            body.AddForce(-body.velocity.y * Vector3.up, ForceMode.VelocityChange);
             body.AddForce(jumpVelocity * Vector3.up, ForceMode.VelocityChange);
         }
 
@@ -63,6 +60,11 @@ namespace Dodge_Bots
             isGrounded = Physics.SphereCast(ray, groundRadius, groundDistance);
         }
         
-        
+        #region Notifications
+        public struct OnMidAirJump : INotification
+        {
+            
+        }
+        #endregion
     }
 }
