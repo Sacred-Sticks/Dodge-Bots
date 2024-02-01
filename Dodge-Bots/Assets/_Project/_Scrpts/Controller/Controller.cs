@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Dodge_Bots
 {
-    public class CharacterController : Observable
+    public class Controller : Observable
     {
         [SerializeField] private float movementSpeed;
         [SerializeField] private float jumpHeight;
@@ -48,7 +48,7 @@ namespace Dodge_Bots
             CheckGrounded();
             if (!isGrounded)
             {
-                NotifyObservers(new OnMidAirJump());
+                NotifyObservers(Event.AirJump);
                 return;
             }
             body.AddForce(jumpVelocity * Vector3.up, ForceMode.VelocityChange);
@@ -61,9 +61,10 @@ namespace Dodge_Bots
         }
         
         #region Notifications
-        public struct OnMidAirJump : INotification
+        public enum Event
         {
-            
+            Jump,
+            AirJump,
         }
         #endregion
     }

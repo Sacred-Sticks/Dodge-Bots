@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0ac5c3b-987f-4b71-9c10-61c4909534ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Dodge-Bots/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Dodge-Bots/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Character Controller.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Character Controller.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Controller/CharacterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Controller/CharacterController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Trampolines/TrampolineCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Trampolines/TrampolineCollider.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +99,7 @@
       <workItem from="1706592726876" duration="148000" />
       <workItem from="1706592984599" duration="8148000" />
       <workItem from="1706654869628" duration="6844000" />
-      <workItem from="1706742999563" duration="11694000" />
+      <workItem from="1706742999563" duration="12275000" />
     </task>
     <servers />
   </component>
