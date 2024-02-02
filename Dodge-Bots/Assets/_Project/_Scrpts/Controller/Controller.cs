@@ -37,14 +37,6 @@ namespace Dodge_Bots
             groundRadius = capsule.radius * radiusMultiplier;
         }
         #endregion
-
-        // protected void MoveTowards(Vector3 direction)
-        // {
-        //     direction = (transform.right * direction.x + transform.forward * direction.z).normalized;
-        //     var velocityChange = direction * movementSpeed - activeVelocity;
-        //     body.AddForce(velocityChange, ForceMode.VelocityChange);
-        //     activeVelocity += velocityChange;
-        // }
         
         protected void MoveTowards(Vector3 direction)
         {
