@@ -30,7 +30,7 @@ namespace Dodge_Bots
         
         private void OnTrampolineCollision(Collision collision)
         {
-            if (!TrampolineManager.TryGetTrampoline(collision.transform.position, out var trampoline))
+            if (!TrampolineManager.TryGetTrampoline(collision.transform.root.position, out var trampoline))
                 return;
             if (!trampolineJumping)
             {

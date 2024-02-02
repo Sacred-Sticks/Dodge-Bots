@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: b4a3db26e10439d41af59c1e981166f5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -240,6 +240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  jumpHeight: 3
+  jumpHeight: 1
   movementInput: {fileID: 11400000, guid: 47bf0e7a2e0e31b4ca4ecd05544c2744, type: 2}
   jumpInput: {fileID: 11400000, guid: 7915f1116f397914e9d1d0c2cb56983b, type: 2}

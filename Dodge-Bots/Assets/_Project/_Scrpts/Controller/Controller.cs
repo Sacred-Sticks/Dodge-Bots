@@ -11,12 +11,15 @@ namespace Dodge_Bots
         [SerializeField] private float jumpHeight;
 
         protected bool isGrounded;
+        private Vector3 activeVelocity;
 
         private Coroutine trampolineRoutine;
         
         // Cached References & Constant Values
         protected Rigidbody body;
         private float jumpVelocity;
+        private const float tolerance = 0.1f;
+        private const float accelerationRate = 0.1f;
         private const float radiusMultiplier = 0.5f;
         private const float groundDistance = 1f;
         private float groundRadius;
@@ -35,17 +38,33 @@ namespace Dodge_Bots
         }
         #endregion
 
+        // protected void MoveTowards(Vector3 direction)
+        // {
+        //     direction = (transform.right * direction.x + transform.forward * direction.z).normalized;
+        //     var velocityChange = direction * movementSpeed - activeVelocity;
+        //     body.AddForce(velocityChange, ForceMode.VelocityChange);
+        //     activeVelocity += velocityChange;
+        // }
+        
         protected void MoveTowards(Vector3 direction)
         {
             direction = (transform.right * direction.x + transform.forward * direction.z).normalized;
-            var previousVelocity = Vector3.ProjectOnPlane(body.velocity, Vector3.up);
-            var velocityChange = direction * movementSpeed - previousVelocity;
-            body.AddForce(velocityChange, ForceMode.VelocityChange);
+            if (direction == Vector3.zero && isGrounded)
+                DecelerateLocalVelocity(); // only decelerate local velocity when grounded to mimic friction
+            var currentVelocity = Vector3.ProjectOnPlane(body.velocity, transform.up);
+            float directionAccuracy = Vector3.Dot(direction, currentVelocity) - 1;
+            if (activeVelocity.sqrMagnitude >= movementSpeed * movementSpeed && !isGrounded)
+                if (directionAccuracy < tolerance)
+                    return; // prevent overcorrecting velocity mid-air
+            if (directionAccuracy > tolerance && currentVelocity.sqrMagnitude > movementSpeed * movementSpeed)
+                return; // prevent moving too fast
+            var acceleration = direction * (movementSpeed * accelerationRate);
+            activeVelocity += acceleration;
+            body.AddForce(acceleration, ForceMode.VelocityChange);
         }
         
         protected void Jump()
         {
-            CheckGrounded();
             if (!isGrounded)
             {
                 NotifyObservers(Event.AirJump);
@@ -54,10 +73,15 @@ namespace Dodge_Bots
             body.AddForce(jumpVelocity * Vector3.up, ForceMode.VelocityChange);
         }
 
-        private void CheckGrounded()
+        protected void CheckGrounded()
         {
             var ray = new Ray(transform.position + transform.up, -transform.up);
             isGrounded = Physics.SphereCast(ray, groundRadius, groundDistance);
+        }
+
+        private void DecelerateLocalVelocity()
+        {
+            activeVelocity -= activeVelocity * (movementSpeed * accelerationRate);
         }
         
         #region Notifications
@@ -68,4 +92,5 @@ namespace Dodge_Bots
         }
         #endregion
     }
+
 }

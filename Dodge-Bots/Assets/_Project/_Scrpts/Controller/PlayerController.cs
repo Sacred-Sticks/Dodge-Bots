@@ -39,6 +39,7 @@ namespace Dodge_Bots
         #region UnityEvents
         private void FixedUpdate()
         {
+            CheckGrounded();
             MoveTowards(rawMovementInput);
         }
         #endregion

@@ -2,6 +2,7 @@
 
 namespace Dodge_Bots
 {
+    [SelectionBase]
     public class Trampoline : MonoBehaviour, ITrampoline
     {
         [SerializeField] private float jumpHeight;
