@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Dodge_Bots
 {
-    public class PlayerController : CharacterController, IInputReceiver
+    public class PlayerController : Controller, IInputReceiver
     {
         [SerializeField] private Vector2Input movementInput;
         [SerializeField] private FloatInput jumpInput;
@@ -39,6 +39,7 @@ namespace Dodge_Bots
         #region UnityEvents
         private void FixedUpdate()
         {
+            CheckGrounded();
             MoveTowards(rawMovementInput);
         }
         #endregion
