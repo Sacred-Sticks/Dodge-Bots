@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Dodge_Bots
 {
-    public class Controller : Observable
+    public abstract class LocomotionController : Observable
     {
         [SerializeField] private float movementSpeed;
         [SerializeField] private float jumpHeight;

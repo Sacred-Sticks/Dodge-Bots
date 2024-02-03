@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Dodge_Bots
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class TrampolineCollider: MonoBehaviour, IObserver<Controller.Event>
+    public class TrampolineCollider: MonoBehaviour, IObserver<LocomotionController.Event>
     {
         private bool trampolineJumping;
 
@@ -19,7 +19,7 @@ namespace Dodge_Bots
         private void Awake()
         {
             TryGetComponent(out body);
-            GetComponentInChildren<Controller>().AddObserver(this);
+            GetComponentInChildren<LocomotionController>().AddObserver(this);
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -49,11 +49,11 @@ namespace Dodge_Bots
             trampolineJumping = false;
         }
 
-        public void OnNotify(Controller.Event argument)
+        public void OnNotify(LocomotionController.Event argument)
         {
             trampolineRoutine = argument switch
             {
-                Controller.Event.AirJump => StartCoroutine(TrampolineJumpTimer()),
+                LocomotionController.Event.AirJump => StartCoroutine(TrampolineJumpTimer()),
                 _ => trampolineRoutine,
             };
         }

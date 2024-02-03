@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Dodge_Bots
 {
-    public class PlayerController : Controller, IInputReceiver
+    public class PlayerController : LocomotionController, IInputReceiver
     {
         [SerializeField] private Vector2Input movementInput;
         [SerializeField] private FloatInput jumpInput;
