@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 832643322342235550}
   - component: {fileID: 1723110221887352265}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rotation Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,11 +26,12 @@ Transform:
   m_GameObject: {fileID: 338686650377676973}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 169371280982300774}
+  - {fileID: 4055405461465170332}
   m_Father: {fileID: 6857492635945006681}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1723110221887352265
@@ -45,8 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a92b151c0a4c86a7d7df19264b1ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 5
+  rotationSpeed: 1
   rotationInput: {fileID: 11400000, guid: 2f36bbafda88dc345920b1ecdfa41312, type: 2}
+  verticalRange: 89
 --- !u!1 &1629075693309974718
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +58,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 169371280982300774}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +91,7 @@ GameObject:
   - component: {fileID: 7884095590054568088}
   - component: {fileID: 2787791696201748086}
   - component: {fileID: 6760252820270460125}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,6 +163,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3544717148342398695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4055405461465170332}
+  m_Layer: 3
+  m_Name: Camera LookAt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4055405461465170332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3544717148342398695}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 832643322342235550}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3672526478646550969
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +207,7 @@ GameObject:
   - component: {fileID: 1996084875632131387}
   - component: {fileID: 1332094835851347994}
   - component: {fileID: 511060901356819900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8030937911295719355}
   - component: {fileID: 5704402338634615770}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Character Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}

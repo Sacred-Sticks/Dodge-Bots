@@ -63,6 +63,7 @@ namespace Dodge_Bots
                 return;
             }
             body.AddForce(jumpVelocity * Vector3.up, ForceMode.VelocityChange);
+            NotifyObservers(Event.Jump);
         }
 
         protected void CheckGrounded()

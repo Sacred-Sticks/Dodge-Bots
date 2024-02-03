@@ -5,10 +5,9 @@ namespace Dodge_Bots
 {
     public class PlayerRotationController : RotationController, IInputReceiver
     {
+        [SerializeField] private float cameraSpeed;
         [SerializeField] private Vector2Input rotationInput;
         [SerializeField] private float verticalRange;
-
-        private Transform cameraTarget;
         
         #region InputHandler
         public void RegisterInputs(Player.PlayerIdentifier playerIdentifier)
@@ -27,23 +26,16 @@ namespace Dodge_Bots
             RotateTowards(input.x);
         }
         #endregion
-        
-        #region UnityEvents
-        private void Awake()
-        {
-            cameraTarget = transform.GetChild(0);
-        }
-        #endregion
 
         private void RotateCamera(float direction)
         {
-            var rotation = cameraTarget.rotation.eulerAngles;
-            rotation.x += direction * rotationSpeed;
+            var rotation = transform.rotation.eulerAngles;
+            rotation.x -= direction * cameraSpeed;
             if (rotation.x < 180 && rotation.x > verticalRange)
                 rotation.x = verticalRange;
             if (rotation.x > 180 && rotation.x < 360 - verticalRange)
                 rotation.x = 360 - verticalRange;
-            cameraTarget.rotation = Quaternion.Euler(rotation);
+            transform.rotation = Quaternion.Euler(rotation);
         }
     }
 }
