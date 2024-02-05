@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0ac5c3b-987f-4b71-9c10-61c4909534ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Controller/LocomotionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Controller/LocomotionController.cs" afterDir="false" />
-    </list>
+    <list default="true" id="b0ac5c3b-987f-4b71-9c10-61c4909534ac" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,7 +103,7 @@
       <workItem from="1706828398371" duration="14182000" />
       <workItem from="1706908591163" duration="6569000" />
       <workItem from="1706920650516" duration="12310000" />
-      <workItem from="1707012374426" duration="3119000" />
+      <workItem from="1707012374426" duration="3163000" />
     </task>
     <servers />
   </component>
