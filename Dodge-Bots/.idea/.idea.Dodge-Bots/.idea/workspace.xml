@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0ac5c3b-987f-4b71-9c10-61c4909534ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Dodge-Bots/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Dodge-Bots/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Character Controller.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Character Controller.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,6 +37,7 @@
     "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "XThreadsFramesViewSplitterKey": "0.49532712",
     "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -110,7 +109,7 @@
       <workItem from="1706920650516" duration="12310000" />
       <workItem from="1707012374426" duration="3163000" />
       <workItem from="1707130483981" duration="600000" />
-      <workItem from="1707512551062" duration="2434000" />
+      <workItem from="1707512551062" duration="3114000" />
     </task>
     <servers />
   </component>
