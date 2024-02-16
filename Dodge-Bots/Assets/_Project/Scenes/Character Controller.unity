@@ -4918,6 +4918,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2879724053258696329, guid: e1692bf99ab8bf94583cdbb00d80f917,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3672526478646550969, guid: e1692bf99ab8bf94583cdbb00d80f917,
         type: 3}
       propertyPath: m_Name
@@ -4972,11 +4977,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548435747196478738, guid: e1692bf99ab8bf94583cdbb00d80f917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using Kickstarter.Observer;
 using UnityEngine;
 
@@ -41,6 +39,7 @@ namespace Dodge_Bots
         protected void MoveTowards(Vector3 direction)
         {
             direction = direction.x * transform.right + direction.z * transform.forward;
+            NotifyObservers(new MovementChange(direction));
             if (!isGrounded)
             {
                 AirborneMoveTowards(direction);
@@ -86,6 +85,7 @@ namespace Dodge_Bots
             var ray = new Ray(transform.position + Vector3.up, -Vector3.up);
             bool previouslyGrounded = isGrounded;
             isGrounded = Physics.SphereCast(ray, groundRadius, groundDistance);
+            NotifyObservers(isGrounded ? Event.Grounded : Event.Airborne);
             if (!previouslyGrounded || isGrounded)
                 return;
             initialAirborneVelocity = Vector3.ProjectOnPlane(body.velocity, Vector3.up);
@@ -96,7 +96,20 @@ namespace Dodge_Bots
         public enum Event
         {
             Jump,
+            Bounce,
             AirJump,
+            Grounded,
+            Airborne,
+        }
+
+        public struct MovementChange : INotification
+        {
+            public Vector3 LocalDirection { get; }
+
+            public MovementChange(Vector3 localDirection)
+            {
+                LocalDirection = localDirection.normalized;
+            }
         }
         #endregion
     }

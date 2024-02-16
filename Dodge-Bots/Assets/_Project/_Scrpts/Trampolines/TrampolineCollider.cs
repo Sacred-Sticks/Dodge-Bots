@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Dodge_Bots
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class TrampolineCollider: MonoBehaviour, IObserver<LocomotionController.Event>
+    public class TrampolineCollider: Observable, IObserver<LocomotionController.Event>
     {
         private bool trampolineJumping;
 
@@ -35,11 +35,13 @@ namespace Dodge_Bots
             if (!trampolineJumping)
             {
                 trampoline.Bounce(body, collision.relativeVelocity);
+                NotifyObservers(LocomotionController.Event.Bounce);
                 return;
             }
             StopCoroutine(trampolineRoutine);
             trampolineJumping = false;
             trampoline.Jump(body);
+            NotifyObservers(LocomotionController.Event.Jump);
         }
         
         protected IEnumerator TrampolineJumpTimer()
