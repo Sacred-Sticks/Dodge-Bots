@@ -23,11 +23,6 @@ namespace Dodge_Bots
             GetComponentInChildren<LocomotionController>().AddObserver(this);
         }
 
-        private void FixedUpdate()
-        {
-            canCollide = true;
-        }
-
         private void OnCollisionEnter(Collision collision)
         {
             OnTrampolineCollision(collision);
@@ -36,9 +31,9 @@ namespace Dodge_Bots
         
         private void OnTrampolineCollision(Collision collision)
         {
-            if (!canCollide)
-                return;
             if (!TrampolineManager.TryGetTrampoline(collision.transform.root.position, out var trampoline))
+                return;
+            if (!canCollide)
                 return;
             canCollide = false;
             if (!trampolineJumping)
@@ -62,11 +57,15 @@ namespace Dodge_Bots
 
         public void OnNotify(LocomotionController.Event argument)
         {
-            trampolineRoutine = argument switch
+            switch (argument)
             {
-                LocomotionController.Event.AirJump => StartCoroutine(TrampolineJumpTimer()),
-                _ => trampolineRoutine,
-            };
+                case LocomotionController.Event.AirJump:
+                    trampolineRoutine = StartCoroutine(TrampolineJumpTimer());
+                    break;
+                case LocomotionController.Event.Airborne:
+                    canCollide = true;
+                    break;
+            }
         }
     }
 }
