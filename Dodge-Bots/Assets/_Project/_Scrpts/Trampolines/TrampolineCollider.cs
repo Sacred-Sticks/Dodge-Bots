@@ -8,7 +8,8 @@ namespace Dodge_Bots
     public class TrampolineCollider: Observable, IObserver<LocomotionController.Event>
     {
         private bool trampolineJumping;
-
+        private bool canCollide;
+        
         private Coroutine trampolineRoutine;
         
         // Cached References and Constant Values
@@ -22,6 +23,11 @@ namespace Dodge_Bots
             GetComponentInChildren<LocomotionController>().AddObserver(this);
         }
 
+        private void FixedUpdate()
+        {
+            canCollide = true;
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
             OnTrampolineCollision(collision);
@@ -30,8 +36,11 @@ namespace Dodge_Bots
         
         private void OnTrampolineCollision(Collision collision)
         {
+            if (!canCollide)
+                return;
             if (!TrampolineManager.TryGetTrampoline(collision.transform.root.position, out var trampoline))
                 return;
+            canCollide = false;
             if (!trampolineJumping)
             {
                 trampoline.Bounce(body, collision.relativeVelocity);

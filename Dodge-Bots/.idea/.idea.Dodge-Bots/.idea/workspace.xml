@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0ac5c3b-987f-4b71-9c10-61c4909534ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Dodge-Bots/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Dodge-Bots/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Character Animator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Character Animator.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Falling Idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Falling Idle.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Idle.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Running Backwards.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Running Backwards.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Running Forwards.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Running Forwards.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Strafe Left.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Strafe Left.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Strafe Right.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Assets/Animations/Character/Strafe Right.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Character Controller.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Character Controller.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Controller/LocomotionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Controller/LocomotionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Trampolines/TrampolineCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/_Scrpts/Trampolines/TrampolineCollider.cs" afterDir="false" />
-    </list>
+    <list default="true" id="b0ac5c3b-987f-4b71-9c10-61c4909534ac" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,10 +79,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="9984">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="9984" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -123,7 +110,7 @@
       <workItem from="1707512551062" duration="3114000" />
       <workItem from="1707784591217" duration="3408000" />
       <workItem from="1707877374829" duration="7020000" />
-      <workItem from="1708062175771" duration="6850000" />
+      <workItem from="1708062175771" duration="7246000" />
     </task>
     <servers />
   </component>
