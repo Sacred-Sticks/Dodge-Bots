@@ -148,6 +148,7 @@ Transform:
   - {fileID: 8148974424379108595}
   - {fileID: 8030937911295719355}
   - {fileID: 832643322342235550}
+  - {fileID: 1646684469496445819}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5683512467812350065
@@ -273,6 +274,37 @@ MonoBehaviour:
   jumpHeight: 1
   movementInput: {fileID: 11400000, guid: 47bf0e7a2e0e31b4ca4ecd05544c2744, type: 2}
   jumpInput: {fileID: 11400000, guid: 7915f1116f397914e9d1d0c2cb56983b, type: 2}
+--- !u!1 &8563375789867357822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1646684469496445819}
+  m_Layer: 3
+  m_Name: Ball Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1646684469496445819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8563375789867357822}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6857492635945006681}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8546777030381882136
 PrefabInstance:
   m_ObjectHideFlags: 0
