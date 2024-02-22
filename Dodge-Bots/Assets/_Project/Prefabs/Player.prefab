@@ -320,8 +320,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchVelocity: 20
   maxCharge: 10
+  ballChargeCost: 2
   rechargeRate: 0.5
   dechargeRate: 2
+  deadTime: 1
   aimInput: {fileID: 11400000, guid: 9d23f122641af40429a558eae1086067, type: 2}
   launchInput: {fileID: 11400000, guid: 297662b06ac9b2d40916dc89ca3acb7e, type: 2}
 --- !u!1001 &8546777030381882136
@@ -392,6 +394,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 8f23635303e4b4942a7113c4a4d9bbdd, type: 2}
+    - target: {fileID: 5866666021909216657, guid: acdcaeef05ae9824389f5676bc352fd5,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

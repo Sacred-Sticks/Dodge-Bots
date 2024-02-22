@@ -1,4 +1,6 @@
 ﻿using Kickstarter.Observer;
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Dodge_Bots
@@ -7,14 +9,42 @@ namespace Dodge_Bots
     {
         [SerializeField] private float launchVelocity;
         [SerializeField] private float maxCharge;
+        [SerializeField] private float ballChargeCost;
         [SerializeField] private float rechargeRate;
         [SerializeField] private float dechargeRate;
         [SerializeField] private float deadTime;
 
-        protected bool isBallActive;
+        private bool isBallActive;
         private float ballCharge;
-        private float deadTimer;
-        private bool canCharge = true;
+        private bool decharging;
+        private Coroutine chargeRoutine;
+
+        protected bool IsBallActive
+        {
+            get => isBallActive;
+            set
+            {
+                isBallActive = value;
+                Func<IEnumerator> charge = IsBallActive ? null : Recharge;
+                if (decharging)
+                {
+                    StopCoroutine(chargeRoutine);
+                    decharging = false;
+                }
+                if (charge != null)
+                    chargeRoutine = StartCoroutine(charge());
+            }
+        }
+        private float BallCharge
+        {
+            get => ballCharge;
+            set
+            {
+                ballCharge = value;
+                Debug.Log("BallCharge: " + ballCharge);
+                NotifyObservers(new BallState(isBallActive, ballCharge));
+            }
+        }
 
         private Rigidbody body;
         private Transform directionSource;
@@ -29,41 +59,43 @@ namespace Dodge_Bots
 
         private void Start()
         {
-            ballCharge = maxCharge;
-        }
-
-        private void Update()
-        {
-            ChargeBall();
+            BallCharge = maxCharge;
         }
         #endregion
 
-        private void ChargeBall()
-        {
-            if (!canCharge)
-            {
-                deadTimer += Time.deltaTime;
-                if (deadTimer >= deadTime)
-                    canCharge = true;
-                return;
-            }
-
-            ballCharge += Time.deltaTime * (isBallActive ? -dechargeRate : rechargeRate);
-            ballCharge = Mathf.Clamp(ballCharge, 0, maxCharge);
-            NotifyObservers(new BallState(isBallActive, ballCharge));
-
-            if (ballCharge != 0)
-                return;
-            canCharge = false;
-            deadTimer = 0;
-        }
-
         protected void Propel()
         {
-            if (ballCharge == 0)
+            if (BallCharge < ballChargeCost)
                 return;
             body.AddForce(directionSource.forward * launchVelocity, ForceMode.VelocityChange);
+            BallCharge -= ballChargeCost;
+            if (chargeRoutine != null)
+                StopCoroutine(chargeRoutine);
+            chargeRoutine = StartCoroutine(Decharge());
         }
+
+        private IEnumerator Decharge()
+        {
+            decharging = true;
+            while (BallCharge > 0)
+            {
+                BallCharge -= Time.deltaTime * dechargeRate;
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            BallCharge = 0;
+            decharging = false;
+        }
+
+        private IEnumerator Recharge()
+        {
+            yield return new WaitForSeconds(deadTime);
+            while (BallCharge < maxCharge)
+            {
+                BallCharge += Time.deltaTime * rechargeRate;
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            BallCharge = maxCharge;
+        }   
 
         #region Notifiers
         public struct BallState : INotification

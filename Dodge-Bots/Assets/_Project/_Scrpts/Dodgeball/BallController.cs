@@ -32,8 +32,8 @@ namespace Dodge_Bots
 
         private void OnLaunchInputChange(float input)
         {
-            isBallActive = input > tolerance;
-            Action action = isBallActive ? Propel : null;
+            IsBallActive = input > tolerance;
+            Action action = IsBallActive ? Propel : null;
             action?.Invoke();
         }
         #endregion
