@@ -1,2 +1,3 @@
-<engine:UXML>
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="project://database/Assets/_Project/UI/Ball%20Charge/Ball%20Charge.uss?fileID=7433441132597879392&amp;guid=94dfa6872c56d6f4d8d0b7cc86229fab&amp;type=3#Ball Charge" />
+</ui:UXML>

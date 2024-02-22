@@ -41,8 +41,7 @@ namespace Dodge_Bots
             set
             {
                 ballCharge = value;
-                Debug.Log("BallCharge: " + ballCharge);
-                NotifyObservers(new BallState(isBallActive, ballCharge));
+                NotifyObservers(new BallState(isBallActive, maxCharge, ballCharge));
             }
         }
 
@@ -100,13 +99,15 @@ namespace Dodge_Bots
         #region Notifiers
         public struct BallState : INotification
         {
-            public BallState(bool isActive, float charge)
+            public BallState(bool isActive, float maxCharge, float charge)
             {
                 IsActive = isActive;
+                MaxCharge = maxCharge;
                 Charge = charge;
             }
 
             public bool IsActive { get; }
+            public float MaxCharge { get; }
             public float Charge { get; }
         }
         #endregion
