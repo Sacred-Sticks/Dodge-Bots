@@ -9,10 +9,19 @@ namespace Dodge_Bots
         [SerializeField] private float waypointDistanceThreshold;
 
         private int currentWaypointIndex;
+        private int CurrentWaypointIndex
+        {
+            get => currentWaypointIndex;
+            set
+            {
+                currentWaypointIndex = value;
+                NotifyObservers(new RotationBrain.TargetAimChange(waypoints[currentWaypointIndex].position));
+            }
+        }
 
         private void Start()
         {
-            currentWaypointIndex = Random.Range(0, waypoints.Length);
+            CurrentWaypointIndex = Random.Range(0, waypoints.Length);
         }
 
         private void FixedUpdate()
@@ -24,11 +33,12 @@ namespace Dodge_Bots
 
         private void HandleMovement()
         {
-            float distanceSquared = Vector3.SqrMagnitude(waypoints[currentWaypointIndex].position - transform.position);
+            float distanceSquared = Vector3.SqrMagnitude(waypoints[CurrentWaypointIndex].position - transform.position);
             if (distanceSquared < waypointDistanceThreshold * waypointDistanceThreshold)
-                currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
-            var direction = waypoints[currentWaypointIndex].position - transform.position;
-            MoveTowards(direction.normalized);
+                CurrentWaypointIndex = (CurrentWaypointIndex + 1) % waypoints.Length;
+
+            var globalDirection = waypoints[currentWaypointIndex].position - transform.root.position;
+            MoveTowards(globalDirection.normalized);
         }
     }
 }

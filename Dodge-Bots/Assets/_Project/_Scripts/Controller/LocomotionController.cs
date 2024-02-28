@@ -38,7 +38,7 @@ namespace Dodge_Bots
 
         protected void MoveTowards(Vector3 direction)
         {
-            direction = direction.x * transform.right + direction.z * transform.forward;
+            direction = Vector3.ProjectOnPlane(direction, Vector3.up);
             NotifyObservers(new MovementChange(direction));
             if (!isGrounded)
             {
@@ -47,7 +47,6 @@ namespace Dodge_Bots
             }
             var currentVelocity = Vector3.ProjectOnPlane(body.velocity, transform.up);
             var desiredVelocity = direction * movementSpeed;
-            var deltaVelocity = (desiredVelocity - currentVelocity) * accelerationRate;
             body.AddForce(desiredVelocity - currentVelocity, ForceMode.VelocityChange);
         }
 
