@@ -1,3 +1,4 @@
+using Kickstarter.Inputs;
 using Kickstarter.Observer;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -21,7 +22,8 @@ namespace Dodge_Bots
 
         private void Start()
         {
-            var ball = FindObjectOfType<BallController>();
+            var player = FindObjectOfType<Player>();
+            var ball = player.GetComponentInChildren<BallController>();
             ball.AddObserver(this);
         }
 
