@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Dodge_Bots
 {
-    public class RotationBrain : RotationController, IObserver<RotationBrain.TargetAimChange>
+    public class RotationBrain : RotationController, IObserver<RotationBrain.TargetAimChange>, IRotator
     {
         [SerializeField]
         private Vector3 target;
@@ -18,20 +18,17 @@ namespace Dodge_Bots
         {
             target = transform.position + new Vector3(3, 0, 0);
         }
-
-        private void Update()
-        {
-            HandleRotation();
-        }
         #endregion
 
-        private void HandleRotation()
+        #region Rotator
+        public void HandleRotation()
         {
             var direction = Vector3.ProjectOnPlane(target - transform.position, Vector3.up);
             var forwards = transform.root.forward;
             float angle = Vector3.SignedAngle(forwards, direction, Vector3.up);
             RotateTowards(angle / 180);
         }
+        #endregion
 
         #region Notifications
         public void OnNotify(TargetAimChange argument)
