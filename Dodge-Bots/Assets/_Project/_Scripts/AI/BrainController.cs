@@ -10,8 +10,6 @@ namespace Dodge_Bots
         [SerializeField] private float visionAngle;
         [SerializeField] private LayerMask layers;
 
-        private GameObject target;
-
         // Components
         private IEntityDetector entityDetector;
         private IRotator rotator;
