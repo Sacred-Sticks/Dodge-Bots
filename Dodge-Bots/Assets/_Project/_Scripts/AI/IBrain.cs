@@ -1,9 +1,11 @@
-﻿namespace Dodge_Bots
+﻿using UnityEngine;
+
+namespace Dodge_Bots
 {
     public interface IBrain
     {
-        public void Activate();
-        public void Deactivate();
+        public void LoseTarget();
+        public void FollowTarget(GameObject target);
     }
 
     public interface IRotator

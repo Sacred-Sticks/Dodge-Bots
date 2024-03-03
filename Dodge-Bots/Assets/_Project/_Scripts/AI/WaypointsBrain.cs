@@ -8,58 +8,81 @@ namespace Dodge_Bots
         [SerializeField] private Transform[] waypoints;
         [SerializeField] private float waypointDistanceThreshold;
 
-        private bool loopActive;
+        private bool overrideTarget;
         private int currentWaypointIndex;
-        private int CurrentWaypointIndex
+        private Transform activeTarget;
+        private Transform ActiveTarget
         {
-            get => currentWaypointIndex;
+            get => activeTarget;
             set
             {
-                currentWaypointIndex = value;
-                NotifyObservers(new RotationBrain.TargetAimChange(waypoints[currentWaypointIndex].position));
+                activeTarget = value;
+                NotifyObservers(new RotationBrain.TargetAimChange(activeTarget));
             }
         }
+
+        // Constants
+        private const float jumpDelay = 1.5f;
 
         #region UnityEvents
         private void Start()
         {
-            CurrentWaypointIndex = Random.Range(0, waypoints.Length);
+            currentWaypointIndex = Random.Range(0, waypoints.Length);
+            ActiveTarget = waypoints[currentWaypointIndex];
+            StartCoroutine(BrainLoop());
+            StartCoroutine(JumpLoop());
+        }
+        #endregion
+
+        #region Brain
+        public void LoseTarget()
+        {
+            overrideTarget = false;
+            ActiveTarget = waypoints[Random.Range(0, waypoints.Length)];
+        }
+
+        public void FollowTarget(GameObject target)
+        {
+            overrideTarget = true;
+            ActiveTarget = target.transform;
         }
         #endregion
 
         private IEnumerator BrainLoop()
         {
-            loopActive = true;
+            overrideTarget = false;
             var delay = new WaitForSeconds(Time.fixedDeltaTime);
-            while (loopActive)
+            while (true)
             {
                 CheckGrounded();
-                Jump();
                 HandleMovement();
                 yield return delay;
             }
         }
 
+        private IEnumerator JumpLoop()
+        {
+            var delay = new WaitForSeconds(jumpDelay);
+            yield return delay;
+            while (true)
+            {
+                yield return delay;
+                Jump();
+            }
+        }
+
         private void HandleMovement()
         {
-            float distanceSquared = Vector3.SqrMagnitude(waypoints[CurrentWaypointIndex].position - transform.position);
-            if (distanceSquared < waypointDistanceThreshold * waypointDistanceThreshold)
-                CurrentWaypointIndex = (CurrentWaypointIndex + 1) % waypoints.Length;
+            float distanceSquared = Vector3.SqrMagnitude(waypoints[currentWaypointIndex].position - transform.position);
+            if (!overrideTarget && distanceSquared < waypointDistanceThreshold * waypointDistanceThreshold)
+            {
+                currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+                ActiveTarget = waypoints[currentWaypointIndex];
+            }
 
-            var globalDirection = waypoints[currentWaypointIndex].position - transform.root.position;
+            var globalDirection = ActiveTarget.position - transform.root.position;
+
             MoveTowards(globalDirection.normalized);
         }
-
-        #region Brain
-        public void Activate()
-        {
-            StartCoroutine(BrainLoop());
-        }
-
-        public void Deactivate()
-        {
-            loopActive = false;
-        }
-        #endregion
     }
 }

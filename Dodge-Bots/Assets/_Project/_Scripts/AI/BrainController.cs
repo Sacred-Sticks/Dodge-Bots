@@ -6,7 +6,6 @@ namespace Dodge_Bots
 {
     public class BrainController : Observable
     {
-        [SerializeField] private float loopTime;
         [SerializeField] private float visionRange;
         [SerializeField] private float visionAngle;
         [SerializeField] private LayerMask layers;
@@ -16,14 +15,17 @@ namespace Dodge_Bots
         // Components
         private IEntityDetector entityDetector;
         private IRotator rotator;
-        private IBrain[] brains;
+        private IBrain brain;
+
+        // Constants
+        private const float loopTime = 0.5f;
 
         #region UnityEvents
         private void Awake()
         {
             entityDetector = transform.root.GetComponentInChildren<IEntityDetector>();
             rotator = transform.root.GetComponentInChildren<IRotator>();
-            brains = transform.root.GetComponentsInChildren<IBrain>();
+            brain = transform.root.GetComponentInChildren<IBrain>();
         }
 
         private void Start()
@@ -40,17 +42,13 @@ namespace Dodge_Bots
         private IEnumerator CheckForEntities()
         {
             var delay = new WaitForSeconds(loopTime);
-            WaypointsBrain waypointsBrain = null;
-            foreach (var brain in brains)
-            {
-                if (brain is WaypointsBrain)
-                    waypointsBrain = brain as WaypointsBrain;
-            }
             for (; ; )
             {
                 var target = entityDetector.Detect(visionRange, visionAngle, layers);
-                Debug.Log(target);
-                waypointsBrain.Activate();
+                if (target != null)
+                    brain.FollowTarget(target);
+                else
+                    brain.LoseTarget();
                 yield return delay;
             }
         }

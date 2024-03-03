@@ -5,8 +5,7 @@ namespace Dodge_Bots
 {
     public class RotationBrain : RotationController, IObserver<RotationBrain.TargetAimChange>, IRotator
     {
-        [SerializeField]
-        private Vector3 target;
+        private Transform target;
 
         #region UnityEvents
         private void Awake()
@@ -16,14 +15,14 @@ namespace Dodge_Bots
 
         private void Start()
         {
-            target = transform.position + new Vector3(3, 0, 0);
+            target = transform;
         }
         #endregion
 
         #region Rotator
         public void HandleRotation()
         {
-            var direction = Vector3.ProjectOnPlane(target - transform.position, Vector3.up);
+            var direction = Vector3.ProjectOnPlane(target.position - transform.position, Vector3.up);
             var forwards = transform.root.forward;
             float angle = Vector3.SignedAngle(forwards, direction, Vector3.up);
             RotateTowards(angle / 180);
@@ -40,8 +39,8 @@ namespace Dodge_Bots
         #region Notifiers
         public struct TargetAimChange : INotification
         {
-            public TargetAimChange(Vector3 target) => Target = target;
-            public Vector3 Target { get; }
+            public TargetAimChange(Transform target) => Target = target;
+            public Transform Target { get; }
         }
         #endregion
     }
