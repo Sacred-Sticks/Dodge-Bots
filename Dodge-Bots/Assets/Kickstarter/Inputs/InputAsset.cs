@@ -108,7 +108,7 @@ namespace Kickstarter.Inputs
                 return;
             var value = context.ReadValue<TType>();
             actionMap.TryGetValue(player, out var listeners);
-            listeners.ForEach(listener => listener(value));
+            listeners?.ForEach(listener => listener(value));
         }
     }
 }

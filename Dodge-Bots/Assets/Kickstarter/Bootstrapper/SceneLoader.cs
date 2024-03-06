@@ -11,7 +11,7 @@ namespace Kickstarter.Bootstrapper
         [SerializeField] private SceneGroup[] _sceneGroups;
 
         private LoadingProgress _progress;
-        private bool _isLoading;
+        private static bool _isLoading;
         
         // Components
         private Camera _loadingCamera;
@@ -56,6 +56,11 @@ namespace Kickstarter.Bootstrapper
         {
             var index = Array.FindIndex(_sceneGroups, group => group.GroupName == groupName);
             await LoadSceneGroup(index);
+        }
+
+        public static bool IsLoadingComplete()
+        {
+            return !_isLoading;
         }
     }
 }
