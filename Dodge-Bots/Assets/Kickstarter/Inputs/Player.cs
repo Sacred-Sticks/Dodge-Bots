@@ -16,7 +16,6 @@ namespace Kickstarter.Inputs
         /// </summary>
         public enum PlayerIdentifier
         {
-            KeyboardAndMouse,
             Player1,
             Player2,
             Player3,
@@ -27,7 +26,7 @@ namespace Kickstarter.Inputs
 
         private void Awake()
         {
-            inputReceivers = GetComponentsInChildren<IInputReceiver>();
+            inputReceivers = GetComponents<IInputReceiver>();
         }
         
         private void Start()

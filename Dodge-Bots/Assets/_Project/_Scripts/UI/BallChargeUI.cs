@@ -29,7 +29,10 @@ namespace Dodge_Bots
 
         private void BuildDocument(VisualElement root)
         {
-            bar = root.CreateChild(positioner).CreateChild(chargeContainer).CreateChild(chargeBar);
+            bar = root
+                .CreateChild<VisualElement>(positioner)
+                .CreateChild<VisualElement>(chargeContainer)
+                .CreateChild<VisualElement>(chargeBar);
         }
 
         #region Notifications

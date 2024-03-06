@@ -17,12 +17,13 @@ namespace Kickstarter.Inputs
         /// Enables the input action associated with this asset.
         /// </summary>
         public void EnableInput() => inputAction.Enable();
-
+        
         /// <summary>
         /// Initializes the input asset with devices and players.
         /// </summary>
         /// <param name="devices">Array of input devices.</param>
-        public abstract void Initialize(InputDevice[] devices);
+        /// <param name="players">Array of players.</param>
+        public abstract void Initialize(InputDevice[] devices, Player[] players);
     }
 
     /// <summary>
@@ -38,9 +39,10 @@ namespace Kickstarter.Inputs
         /// Enables the InputAsset to register input listeners associated with specific players.
         /// </summary>
         /// <param name="devices">Array of input devices.</param>
-        public override void Initialize(InputDevice[] devices)
+        /// <param name="players">Array of player components to be assigned an input device.</param>
+        public override void Initialize(InputDevice[] devices, Player[] players)
         {
-            CreateMaps(devices);
+            CreateMaps(devices, players.Reverse().ToArray());
             AddRegistration();
         }
 
@@ -82,20 +84,12 @@ namespace Kickstarter.Inputs
 
         private void OnEnable() => actionsRegistered = false;
 
-        private void CreateMaps(IReadOnlyCollection<InputDevice> devices)
+        private void CreateMaps(IReadOnlyCollection<InputDevice> devices, IReadOnlyList<Player> players)
         {
             playerDevices = new Dictionary<InputDevice, Player.PlayerIdentifier>();
             var inputDevices = devices.Where(d => d is not Mouse).ToArray();
-            var players = new []
-            {
-                Player.PlayerIdentifier.KeyboardAndMouse,
-                Player.PlayerIdentifier.Player1,
-                Player.PlayerIdentifier.Player2,
-                Player.PlayerIdentifier.Player3,
-                Player.PlayerIdentifier.Player4,
-            };
-            for (int i = 0; i < Math.Min(inputDevices.Length, players.Length); i++)
-                playerDevices.Add(inputDevices.ToArray()[i], players[i]);
+            for (int i = 0; i < Math.Min(inputDevices.Length, players.Count); i++)
+                playerDevices.Add(inputDevices.ToArray()[i], players[i].Identifier);
 
             actionMap = new Dictionary<Player.PlayerIdentifier, List<Action<TType>>>();
         }
@@ -114,7 +108,7 @@ namespace Kickstarter.Inputs
                 return;
             var value = context.ReadValue<TType>();
             actionMap.TryGetValue(player, out var listeners);
-            listeners?.ForEach(listener => listener(value));
+            listeners.ForEach(listener => listener(value));
         }
     }
 }

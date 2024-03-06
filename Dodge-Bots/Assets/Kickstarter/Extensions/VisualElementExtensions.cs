@@ -2,9 +2,9 @@ using UnityEngine.UIElements;
 
 public static class VisualElementExtensions
 {
-    public static VisualElement CreateChild(this VisualElement parent, params string[] classes)
+    public static T CreateChild<T>(this VisualElement parent, params string[] classes) where T : VisualElement, new()
     {
-        var child = new VisualElement();
+        var child = new T();
         foreach (var @class in classes)
         {
             child.AddToClassList(@class);
