@@ -1,3 +1,4 @@
+using Kickstarter.Inputs;
 using Kickstarter.Observer;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -21,13 +22,17 @@ namespace Dodge_Bots
 
         private void Start()
         {
-            var ball = FindObjectOfType<BallController>();
+            var player = FindObjectOfType<Player>();
+            var ball = player.GetComponentInChildren<BallController>();
             ball.AddObserver(this);
         }
 
         private void BuildDocument(VisualElement root)
         {
-            bar = root.CreateChild(positioner).CreateChild(chargeContainer).CreateChild(chargeBar);
+            bar = root
+                .CreateChild<VisualElement>(positioner)
+                .CreateChild<VisualElement>(chargeContainer)
+                .CreateChild<VisualElement>(chargeBar);
         }
 
         #region Notifications

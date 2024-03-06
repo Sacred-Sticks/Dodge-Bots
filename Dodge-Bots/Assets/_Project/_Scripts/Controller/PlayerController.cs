@@ -40,7 +40,7 @@ namespace Dodge_Bots
         private void FixedUpdate()
         {
             CheckGrounded();
-            MoveTowards(rawMovementInput);
+            MoveTowards(transform.root.TransformDirection(rawMovementInput));
         }
         #endregion
     }

@@ -24,8 +24,9 @@ namespace Kickstarter.Inputs
         public void InitializeInputs()
         {
             var devices = InputSystem.devices.ToArray();
+            var players = FindObjectsOfType<Player>();
             foreach (var inputObject in inputObjects)
-                inputObject.Initialize(devices);
+                inputObject.Initialize(devices, players);
             EnableAll();
         }
 
