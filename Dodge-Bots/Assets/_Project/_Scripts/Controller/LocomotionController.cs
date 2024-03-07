@@ -39,7 +39,7 @@ namespace Dodge_Bots
         protected void MoveTowards(Vector3 direction)
         {
             direction = Vector3.ProjectOnPlane(direction, Vector3.up);
-            NotifyObservers(new MovementChange(direction));
+            NotifyObservers(new MovementChange(transform.InverseTransformDirection(direction)));
             if (!isGrounded)
             {
                 AirborneMoveTowards(direction);
