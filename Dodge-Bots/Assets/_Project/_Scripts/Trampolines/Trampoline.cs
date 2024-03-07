@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Kickstarter.Bootstrapper;
+using UnityEngine;
 
 namespace Dodge_Bots
 {
     [SelectionBase]
-    public class Trampoline : MonoBehaviour, ITrampoline
+    public class Trampoline : MonoBehaviour, ITrampoline, IAwake, IStart
     {
         [SerializeField] private float jumpHeight;
         [SerializeField] private float bounceMultiplier;
@@ -11,12 +12,12 @@ namespace Dodge_Bots
         private float jumpVelocity;
         
         #region UnityEvents
-        private void Awake()
+        public void Awake_()
         {
-            //TrampolineManager.AddTrampoline(transform.position, this);
+            TrampolineManager.AddTrampoline(transform.position, this);
         }
 
-        private void Start()
+        public void Start_()
         {
             jumpVelocity = Mathf.Sqrt(Mathf.Abs(2 * jumpHeight * Physics.gravity.y));
         }
