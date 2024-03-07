@@ -1,5 +1,4 @@
-﻿using Cinemachine;
-using Kickstarter.Observer;
+﻿using Kickstarter.Observer;
 using System;
 using System.Collections;
 using UnityEngine;
