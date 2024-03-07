@@ -14,8 +14,9 @@ namespace Dodge_Bots
 
         private Transform cameraTransform;
 
-        public void Start()
+        protected override void Start()
         {
+            base.Start();
             cameraTransform = FindObjectOfType<CinemachineBrain>().transform;
         }
 

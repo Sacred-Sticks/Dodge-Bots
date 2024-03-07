@@ -14,6 +14,8 @@ namespace Dodge_Bots
         [SerializeField] private float dechargeRate;
         [SerializeField] private float deadTime;
 
+        public float MaxCharge => maxCharge;
+
         private bool isBallActive;
         private float ballCharge;
         private bool decharging;
@@ -53,7 +55,7 @@ namespace Dodge_Bots
             body = GetComponentInParent<Rigidbody>();
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             BallCharge = maxCharge;
         }

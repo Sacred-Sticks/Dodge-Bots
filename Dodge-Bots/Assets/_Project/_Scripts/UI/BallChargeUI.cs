@@ -7,17 +7,18 @@ namespace Dodge_Bots
 {
     public class BallChargeUI : MonoBehaviour, IObserver<Ball.BallState>
     {
-        private VisualElement bar;
+        private ProgressBar bar;
 
-        private const string positioner = "positioner";
-        private const string chargeContainer = "chargeContainer";
-        private const string chargeBar = "chargeBar";
+        private const string chargeBar = "charge_bar";
 
         private void Awake()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
             root.AddToClassList("container");
             BuildDocument(root);
+            bar.lowValue = 0;
+            bar.highValue = 1;
+            bar.value = bar.highValue;
         }
 
         private void Start()
@@ -29,16 +30,13 @@ namespace Dodge_Bots
 
         private void BuildDocument(VisualElement root)
         {
-            bar = root
-                .CreateChild<VisualElement>(positioner)
-                .CreateChild<VisualElement>(chargeContainer)
-                .CreateChild<VisualElement>(chargeBar);
+            bar = root.CreateChild<ProgressBar>(chargeBar);
         }
 
         #region Notifications
         public void OnNotify(Ball.BallState argument)
         {
-            bar.style.flexGrow = argument.Charge / argument.MaxCharge;
+            bar.value = argument.Charge / argument.MaxCharge;
         }
         #endregion
     }
