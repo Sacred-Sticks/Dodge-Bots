@@ -17,7 +17,8 @@ namespace Dodge_Bots
         // Cached References & Constant Values
         protected Rigidbody body;
         private float jumpVelocity;
-        private const float accelerationRate = 0.1f;
+        private const float groundedAccelerationRate = 50f;
+        private const float airborneAccelerationRate = 0.1f;
         private const float radiusMultiplier = 0.5f;
         private const float groundDistance = 1f;
         private float groundRadius;
@@ -46,6 +47,8 @@ namespace Dodge_Bots
                 return;
             }
             var currentVelocity = Vector3.ProjectOnPlane(body.velocity, transform.up);
+            if (currentVelocity.sqrMagnitude > movementSpeed * movementSpeed)
+                return;
             var desiredVelocity = direction * movementSpeed;
             body.AddForce(desiredVelocity - currentVelocity, ForceMode.VelocityChange);
         }
@@ -59,7 +62,7 @@ namespace Dodge_Bots
             if (airborneVelocity.sqrMagnitude > movementSpeed * movementSpeed)
                 return;
             var desiredVelocity = direction * movementSpeed;
-            var deltaVelocity = (desiredVelocity - airborneVelocity) * accelerationRate;
+            var deltaVelocity = (desiredVelocity - airborneVelocity) * airborneAccelerationRate;
             airborneVelocity += deltaVelocity;
             body.AddForce(deltaVelocity, ForceMode.VelocityChange);
         }
