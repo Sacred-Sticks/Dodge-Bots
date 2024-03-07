@@ -1,12 +1,11 @@
 using Cinemachine;
-using Kickstarter.Bootstrapper;
 using Kickstarter.Inputs;
 using System;
 using UnityEngine;
 
 namespace Dodge_Bots
 {
-    public class BallController : Ball, IInputReceiver, IAwake
+    public class BallController : Ball, IInputReceiver
     {
         [SerializeField] private FloatInput aimInput;
         [SerializeField] private FloatInput launchInput;
@@ -15,7 +14,7 @@ namespace Dodge_Bots
 
         private Transform cameraTransform;
 
-        public void Awake_()
+        public void Start()
         {
             cameraTransform = FindObjectOfType<CinemachineBrain>().transform;
         }
