@@ -239,7 +239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 0.5
-  target: {x: 0, y: 0, z: 0}
 --- !u!1 &7643435763943471095
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a30049a6e0471448bd88215ae1d0944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopTime: 5
   visionRange: 10
   visionAngle: 45
   layers:
@@ -299,7 +297,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1646684469496445819}
-  - component: {fileID: 8243747794270534930}
   m_Layer: 3
   m_Name: Ball Controller
   m_TagString: Untagged
@@ -322,26 +319,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6857492635945006681}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8243747794270534930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8563375789867357822}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc7d3c07b06c66f44809a8139cda5185, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  launchVelocity: 20
-  maxCharge: 10
-  ballChargeCost: 2
-  rechargeRate: 0.5
-  dechargeRate: 2
-  deadTime: 1
-  aimInput: {fileID: 11400000, guid: 9d23f122641af40429a558eae1086067, type: 2}
-  launchInput: {fileID: 11400000, guid: 297662b06ac9b2d40916dc89ca3acb7e, type: 2}
 --- !u!1001 &8546777030381882136
 PrefabInstance:
   m_ObjectHideFlags: 0

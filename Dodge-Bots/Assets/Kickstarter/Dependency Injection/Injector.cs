@@ -43,20 +43,55 @@ namespace Kickstarter.DependencyInjection
         private void RegisterProvider(IDependencyProvider provider)
         {
             var methods = provider.GetType().GetMethods(_bindingFlags);
-            foreach (var method in methods)
-            {
-                if (!Attribute.IsDefined(method, typeof(ProvideAttribute)))
-                    continue;
+            RegisterMethodProviders(provider, methods);
+            var fields = provider.GetType().GetFields(_bindingFlags);
+            RegisterFieldProviders(provider, fields);
+            var properties = provider.GetType().GetProperties(_bindingFlags);
+            RegisterPropertyProviders(provider, properties);
 
-                var returnType = method.ReturnType;
-                var providedInstance = method.Invoke(provider, null);
-                if (providedInstance != null)
+            void RegisterMethodProviders(IDependencyProvider provider, MethodInfo[] methods)
+            {
+                foreach (var method in methods)
                 {
+                    if (!Attribute.IsDefined(method, typeof(ProvideAttribute)))
+                        continue;
+
+                    var returnType = method.ReturnType;
+                    var providedInstance = method.Invoke(provider, null);
+                    if (providedInstance == null)
+                        throw new Exception($"Provider {provider.GetType().Name} returned null for {returnType.Name}");
                     registry.Add(returnType, providedInstance);
-                    // Debug.Log($"Registered {returnType.Name} from {provider.GetType().Name}");
                 }
-                else
-                    throw new Exception($"Provider {provider.GetType().Name} returned null for {returnType.Name}");
+            }
+
+            void RegisterFieldProviders(IDependencyProvider provider, FieldInfo[] fields)
+            {
+                foreach (var field in fields)
+                {
+                    if (!Attribute.IsDefined(field, typeof(ProvideAttribute)))
+                        continue;
+
+                    var returnType = field.FieldType;
+                    var providedInstance = field.GetValue(provider);
+                    if (providedInstance == null)
+                        throw new Exception($"Provider {provider.GetType().Name} returned null for {returnType.Name}");
+                    registry.Add(returnType, providedInstance);
+                }
+            }
+
+            void RegisterPropertyProviders(IDependencyProvider provider, PropertyInfo[] properties)
+            {
+                foreach (var property in properties)
+                {
+                    if (!Attribute.IsDefined(property, typeof(ProvideAttribute)))
+                        continue;
+
+                    var returnType = property.PropertyType;
+                    var providedInstance = property.GetValue(provider);
+                    if (providedInstance == null)
+                        throw new Exception($"Provider {provider.GetType().Name} returned null for {returnType.Name}");
+                    registry.Add(returnType, providedInstance);
+                }
             }
         }
 
@@ -73,60 +108,57 @@ namespace Kickstarter.DependencyInjection
             InjectFields(instance, type);
             InjectMethods(instance, type);
             InjectProperties(instance, type);
-        }
 
-        private void InjectFields(object instance, Type type)
-        {
-            var injectableFields = type.GetFields(_bindingFlags)
-                .Where(member => Attribute.IsDefined(member, typeof(InjectAttribute)));
-
-            foreach (var injectableField in injectableFields)
+            void InjectFields(object instance, Type type)
             {
-                var fieldType = injectableField.FieldType;
-                var resolvedInstance = Resolve(fieldType);
-                if (resolvedInstance == null)
-                    throw new Exception($"Failed to resolve {fieldType.Name} for {type.Name}");
+                var injectableFields = type.GetFields(_bindingFlags)
+                    .Where(member => Attribute.IsDefined(member, typeof(InjectAttribute)));
 
-                injectableField.SetValue(instance, resolvedInstance);
-                Debug.Log($"Field Injected {fieldType.Name} into {type.Name}");
+                foreach (var injectableField in injectableFields)
+                {
+                    var fieldType = injectableField.FieldType;
+                    var resolvedInstance = Resolve(fieldType);
+                    if (resolvedInstance == null)
+                        throw new Exception($"Failed to resolve {fieldType.Name} for {type.Name}");
+
+                    injectableField.SetValue(instance, resolvedInstance);
+                }
             }
-        }
 
-        private void InjectMethods(object instance, Type type)
-        {
-            var injectableMethods = type.GetMethods(_bindingFlags)
-                .Where(member => Attribute.IsDefined(member, typeof(InjectAttribute)));
-
-            foreach (var injectableMethod in injectableMethods)
+            void InjectMethods(object instance, Type type)
             {
-                var requiredParamaters = injectableMethod.GetParameters()
-                    .Select(parameter => parameter.ParameterType)
-                    .ToArray();
-                var resolvedInstances = requiredParamaters
-                    .Select(Resolve)
-                    .ToArray();
-                if (resolvedInstances.Any(resolvedInstance => resolvedInstance == null))
-                    throw new Exception($"Failed to resolve parameters for {type.Name}.{injectableMethod.Name}");
+                var injectableMethods = type.GetMethods(_bindingFlags)
+                    .Where(member => Attribute.IsDefined(member, typeof(InjectAttribute)));
 
-                injectableMethod.Invoke(instance, resolvedInstances);
-                Debug.Log($"Method Injected {type.Name}.{injectableMethod.Name}");
+                foreach (var injectableMethod in injectableMethods)
+                {
+                    var requiredParamaters = injectableMethod.GetParameters()
+                        .Select(parameter => parameter.ParameterType)
+                        .ToArray();
+                    var resolvedInstances = requiredParamaters
+                        .Select(Resolve)
+                        .ToArray();
+                    if (resolvedInstances.Any(resolvedInstance => resolvedInstance == null))
+                        throw new Exception($"Failed to resolve parameters for {type.Name}.{injectableMethod.Name}");
+
+                    injectableMethod.Invoke(instance, resolvedInstances);
+                }
             }
-        }
 
-        private void InjectProperties(object instance, Type type)
-        {
-            var injectableProperties = type.GetProperties(_bindingFlags)
-                .Where(member => Attribute.IsDefined(member, typeof(InjectAttribute)));
-
-            foreach (var injectableProperty in injectableProperties)
+            void InjectProperties(object instance, Type type)
             {
-                var fieldType = injectableProperty.PropertyType;
-                var resolvedInstance = Resolve(fieldType);
-                if (resolvedInstance == null)
-                    throw new Exception($"Failed to resolve {fieldType.Name} for {type.Name}");
+                var injectableProperties = type.GetProperties(_bindingFlags)
+                    .Where(member => Attribute.IsDefined(member, typeof(InjectAttribute)));
 
-                injectableProperty.SetValue(instance, resolvedInstance);
-                Debug.Log($"Field Injected {fieldType.Name} into {type.Name}");
+                foreach (var injectableProperty in injectableProperties)
+                {
+                    var fieldType = injectableProperty.PropertyType;
+                    var resolvedInstance = Resolve(fieldType);
+                    if (resolvedInstance == null)
+                        throw new Exception($"Failed to resolve {fieldType.Name} for {type.Name}");
+
+                    injectableProperty.SetValue(instance, resolvedInstance);
+                }
             }
         }
     }

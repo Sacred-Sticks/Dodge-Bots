@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Threading.Tasks;
 using System;
+using Kickstarter.DependencyInjection;
 
 namespace Kickstarter.Bootstrapper
 {
     public class SceneLoader : MonoBehaviour
     {
-        [DependencyInjection.Inject] private SceneLoader _sceneLoader => this;
+        [Provide] private SceneLoader _sceneLoader => this;
 
         [SerializeField] private SceneGroup[] _sceneGroups;
 

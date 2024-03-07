@@ -199,55 +199,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 86778539301021159, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
-        type: 3}
-      propertyPath: sourceAsset
-      value: 
-      objectReference: {fileID: 9197481963319205126, guid: 827e812001fb0f94aba76f010b71f726,
-        type: 3}
-    - target: {fileID: 86778539301021159, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
-        type: 3}
-      propertyPath: m_PanelSettings
-      value: 
-      objectReference: {fileID: 11400000, guid: 5dd1afd201082b146b357407123cec06,
-        type: 2}
-    - target: {fileID: 4428548323318455960, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
-        type: 3}
-      propertyPath: _sceneGroups.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4428548323318455960, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
-        type: 3}
-      propertyPath: _sceneGroups.Array.data[0].GroupName
-      value: Testing Group
-      objectReference: {fileID: 0}
-    - target: {fileID: 4428548323318455960, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
-        type: 3}
-      propertyPath: _sceneGroups.Array.data[0].Scenes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4428548323318455960, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
-        type: 3}
-      propertyPath: _sceneGroups.Array.data[0].Scenes.Array.data[0].Reference.guid
-      value: 0ffe5cba814e7eb4f8f953ae3235120f
-      objectReference: {fileID: 0}
-    - target: {fileID: 4428548323318455960, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
-        type: 3}
-      propertyPath: _sceneGroups.Array.data[0].Scenes.Array.data[1].Reference.guid
-      value: 0ffe5cba814e7eb4f8f953ae3235120f
-      objectReference: {fileID: 0}
-    - target: {fileID: 4428548323318455960, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
-        type: 3}
-      propertyPath: _sceneGroups.Array.data[0].Scenes.Array.data[0].Reference.asset
-      value: 
-      objectReference: {fileID: 102900000, guid: 0ffe5cba814e7eb4f8f953ae3235120f,
-        type: 3}
-    - target: {fileID: 4428548323318455960, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
-        type: 3}
-      propertyPath: _sceneGroups.Array.data[0].Scenes.Array.data[1].Reference.asset
-      value: 
-      objectReference: {fileID: 102900000, guid: 0ffe5cba814e7eb4f8f953ae3235120f,
-        type: 3}
     - target: {fileID: 7828966205128970968, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
         type: 3}
       propertyPath: m_Name
@@ -306,8 +257,62 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5035626971830112034, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1046924378}
   m_SourcePrefab: {fileID: 100100000, guid: 6e232fa1e86ef044984e0b7cfc2662b2, type: 3}
+--- !u!1 &1046924377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5035626971830112034, guid: 6e232fa1e86ef044984e0b7cfc2662b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1046924376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1046924378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046924377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

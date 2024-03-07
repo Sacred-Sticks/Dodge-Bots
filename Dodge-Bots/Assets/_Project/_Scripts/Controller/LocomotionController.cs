@@ -52,12 +52,8 @@ namespace Dodge_Bots
 
         private void AirborneMoveTowards(Vector3 direction)
         {
-            // Modify to allow for movement backwards or sideways, but forwards is fully clamped
             if (direction == Vector3.zero)
                 return;
-            // if ((airborneVelocity + initialAirborneVelocity).sqrMagnitude > movementSpeed * movementSpeed
-            //     && Vector3.Dot(direction, initialAirborneVelocity) < 0)
-            //     return;
             if (Vector3.Dot(direction, initialAirborneVelocity) > 0)
                 return;
             if (airborneVelocity.sqrMagnitude > movementSpeed * movementSpeed)

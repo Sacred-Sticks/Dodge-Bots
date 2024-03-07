@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Character Controller.unity
     guid: 0ffe5cba814e7eb4f8f953ae3235120f
+  - enabled: 1
+    path: Assets/_Project/Scenes/Charge HUD.unity
+    guid: 0b1e0fd021576ed46b70ec0561789faf
+  - enabled: 1
+    path: Assets/_Project/Scenes/Dependency Injector.unity
+    guid: 78a66e45f3806114f99fdfd9aee65496
   m_configObjects: {}

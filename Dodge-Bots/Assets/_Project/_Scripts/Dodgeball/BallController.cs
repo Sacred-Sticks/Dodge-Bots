@@ -1,14 +1,17 @@
 using Cinemachine;
+using Kickstarter.DependencyInjection;
 using Kickstarter.Inputs;
 using System;
 using UnityEngine;
 
 namespace Dodge_Bots
 {
-    public class BallController : Ball, IInputReceiver
+    public class BallController : Ball, IInputReceiver, IDependencyProvider
     {
         [SerializeField] private FloatInput aimInput;
         [SerializeField] private FloatInput launchInput;
+
+        [Provide] private BallController ballController => this;
 
         const float tolerance = 0.5f;
 

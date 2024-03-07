@@ -129,7 +129,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18680be2f78513c42a8fa3bbb5e87641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneGroups: []
+  _sceneGroups:
+  - GroupName: Testing Group
+    Scenes:
+    - Reference:
+        asset: {fileID: 102900000, guid: 0ffe5cba814e7eb4f8f953ae3235120f, type: 3}
+        guid: 0ffe5cba814e7eb4f8f953ae3235120f
+      Type: 0
+    - Reference:
+        asset: {fileID: 102900000, guid: 0b1e0fd021576ed46b70ec0561789faf, type: 3}
+        guid: 0b1e0fd021576ed46b70ec0561789faf
+      Type: 3
+    - Reference:
+        asset: {fileID: 102900000, guid: 78a66e45f3806114f99fdfd9aee65496, type: 3}
+        guid: 78a66e45f3806114f99fdfd9aee65496
+      Type: 6
 --- !u!1 &8079173975806723985
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,9 +189,10 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 0}
+  m_PanelSettings: {fileID: 11400000, guid: 5dd1afd201082b146b357407123cec06, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 827e812001fb0f94aba76f010b71f726,
+    type: 3}
   m_SortingOrder: 0
 --- !u!114 &4342809994002962064
 MonoBehaviour:

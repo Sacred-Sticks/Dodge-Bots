@@ -1,12 +1,22 @@
-using Kickstarter.Inputs;
-using Kickstarter.Observer;
+using Kickstarter.DependencyInjection;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Dodge_Bots
 {
-    public class BallChargeUI : MonoBehaviour, IObserver<Ball.BallState>
+    public class BallChargeHUD : MonoBehaviour, IDependencyProvider
     {
+        private BallController ballController;
+        [Inject] private BallController BallController
+        {
+            get => ballController;
+            set
+            {
+                ballController = value;
+                ballController.OnChargeChange += SetHUDCharge;
+            }
+        }
+
         private ProgressBar bar;
 
         private const string chargeBar = "charge_bar";
@@ -21,23 +31,14 @@ namespace Dodge_Bots
             bar.value = bar.highValue;
         }
 
-        private void Start()
-        {
-            var player = FindObjectOfType<Player>();
-            var ball = player.GetComponentInChildren<BallController>();
-            ball.AddObserver(this);
-        }
-
         private void BuildDocument(VisualElement root)
         {
             bar = root.CreateChild<ProgressBar>(chargeBar);
         }
 
-        #region Notifications
-        public void OnNotify(Ball.BallState argument)
+        private void SetHUDCharge(float argument)
         {
-            bar.value = argument.Charge / argument.MaxCharge;
+            bar.value = argument;
         }
-        #endregion
     }
 }

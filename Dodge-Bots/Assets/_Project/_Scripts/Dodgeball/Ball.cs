@@ -1,11 +1,10 @@
-﻿using Kickstarter.Observer;
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
 namespace Dodge_Bots
 {
-    public class Ball : Observable
+    public class Ball : MonoBehaviour
     {
         [SerializeField] private float launchVelocity;
         [SerializeField] private float maxCharge;
@@ -15,9 +14,19 @@ namespace Dodge_Bots
         [SerializeField] private float deadTime;
 
         public float MaxCharge => maxCharge;
+        public Action<float> OnChargeChange;
 
         private bool isBallActive;
         private float ballCharge;
+        private float BallCharge
+        {
+            get => ballCharge;
+            set
+            {
+                ballCharge = value;
+                OnChargeChange?.Invoke(ballCharge / MaxCharge);
+            }
+        }
         private bool decharging;
         private Coroutine chargeRoutine;
 
@@ -35,15 +44,6 @@ namespace Dodge_Bots
                 }
                 if (charge != null)
                     chargeRoutine = StartCoroutine(charge());
-            }
-        }
-        private float BallCharge
-        {
-            get => ballCharge;
-            set
-            {
-                ballCharge = value;
-                NotifyObservers(new BallState(isBallActive, maxCharge, ballCharge));
             }
         }
 
@@ -94,21 +94,5 @@ namespace Dodge_Bots
             }
             BallCharge = maxCharge;
         }   
-
-        #region Notifiers
-        public struct BallState : INotification
-        {
-            public BallState(bool isActive, float maxCharge, float charge)
-            {
-                IsActive = isActive;
-                MaxCharge = maxCharge;
-                Charge = charge;
-            }
-
-            public bool IsActive { get; }
-            public float MaxCharge { get; }
-            public float Charge { get; }
-        }
-        #endregion
     }
 }
