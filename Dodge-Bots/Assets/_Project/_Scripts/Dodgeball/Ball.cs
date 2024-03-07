@@ -47,14 +47,11 @@ namespace Dodge_Bots
         }
 
         private Rigidbody body;
-        private Transform directionSource;
 
         #region UnityEvents
         private void Awake()
         {
             body = GetComponentInParent<Rigidbody>();
-            var camera = FindObjectOfType<CinemachineBrain>();
-            directionSource = camera.transform;
         }
 
         private void Start()
@@ -63,11 +60,11 @@ namespace Dodge_Bots
         }
         #endregion
 
-        protected void Propel()
+        protected void Propel(Vector3 direction)
         {
             if (BallCharge < ballChargeCost)
                 return;
-            body.AddForce(directionSource.forward * launchVelocity, ForceMode.VelocityChange);
+            body.AddForce(direction * launchVelocity, ForceMode.VelocityChange);
             BallCharge -= ballChargeCost;
             if (chargeRoutine != null)
                 StopCoroutine(chargeRoutine);

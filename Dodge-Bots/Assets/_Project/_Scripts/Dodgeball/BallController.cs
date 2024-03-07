@@ -1,15 +1,24 @@
+using Cinemachine;
+using Kickstarter.Bootstrapper;
 using Kickstarter.Inputs;
 using System;
 using UnityEngine;
 
 namespace Dodge_Bots
 {
-    public class BallController : Ball, IInputReceiver
+    public class BallController : Ball, IInputReceiver, IAwake
     {
         [SerializeField] private FloatInput aimInput;
         [SerializeField] private FloatInput launchInput;
 
         const float tolerance = 0.5f;
+
+        private Transform cameraTransform;
+
+        public void Awake_()
+        {
+            cameraTransform = FindObjectOfType<CinemachineBrain>().transform;
+        }
 
         #region InputHandler
         public void RegisterInputs(Player.PlayerIdentifier playerIdentifier)
@@ -33,8 +42,8 @@ namespace Dodge_Bots
         private void OnLaunchInputChange(float input)
         {
             IsBallActive = input > tolerance;
-            Action action = IsBallActive ? Propel : null;
-            action?.Invoke();
+            Action<Vector3> action = IsBallActive ? Propel : null;
+            action?.Invoke(cameraTransform.forward);
         }
         #endregion
 
