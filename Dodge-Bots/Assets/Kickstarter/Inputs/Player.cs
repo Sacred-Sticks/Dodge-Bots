@@ -1,7 +1,4 @@
-using Kickstarter.Bootstrapper;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Kickstarter.Inputs
 {
@@ -26,28 +23,26 @@ namespace Kickstarter.Inputs
         }
         
         private IInputReceiver[] inputReceivers;
-        
-        private IEnumerator Start()
+
+        private void Awake()
         {
-            yield return new WaitUntil(SceneLoader.IsLoadingComplete);
-            yield return new WaitForEndOfFrame();
-            inputReceivers = GetComponentsInChildren<IInputReceiver>();
+            inputReceivers = GetComponents<IInputReceiver>();
+        }
+        
+        private void Start()
+        {
             foreach (var inputReceiver in inputReceivers)
                 inputReceiver.RegisterInputs(Identifier);
         }
 
         private void OnEnable()
         {
-            if (inputReceivers == null)
-                return;
             foreach (var inputReceiver in inputReceivers)
                 inputReceiver.RegisterInputs(Identifier);
         }
 
         private void OnDisable()
         {
-            if (inputReceivers == null)
-                return;
             foreach (var inputReceiver in inputReceivers)
                 inputReceiver.DeregisterInputs(Identifier);
         }

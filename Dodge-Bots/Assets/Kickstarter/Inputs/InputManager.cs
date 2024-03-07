@@ -1,5 +1,3 @@
-using Kickstarter.Bootstrapper;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,15 +15,14 @@ namespace Kickstarter.Inputs
         /// </summary>
         private void Awake()
         {
-            StartCoroutine(InitializeInputs());
+            InitializeInputs();
         }
 
         /// <summary>
         /// Initializes all input assets with connected devices and players.
         /// </summary>
-        public IEnumerator InitializeInputs()
+        public void InitializeInputs()
         {
-            yield return new WaitUntil(SceneLoader.IsLoadingComplete);
             var devices = InputSystem.devices.ToArray();
             var players = FindObjectsOfType<Player>();
             foreach (var inputObject in inputObjects)
