@@ -1,3 +1,4 @@
+using Kickstarter.Bootstrapper;
 using UnityEngine;
 
 namespace Kickstarter.Inputs
@@ -6,7 +7,7 @@ namespace Kickstarter.Inputs
     /// Represents a player in the game, facilitating input registration and deregistration.
     /// </summary>
     [SelectionBase]
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IAwake, IStart
     {
         [field: SerializeField]
         public PlayerIdentifier Identifier { get; private set; }
@@ -24,12 +25,12 @@ namespace Kickstarter.Inputs
         
         private IInputReceiver[] inputReceivers;
 
-        private void Awake()
+        public void Awake_()
         {
-            inputReceivers = GetComponents<IInputReceiver>();
+            inputReceivers = GetComponentsInChildren<IInputReceiver>();
         }
         
-        private void Start()
+        public void Start_()
         {
             foreach (var inputReceiver in inputReceivers)
                 inputReceiver.RegisterInputs(Identifier);
@@ -37,12 +38,16 @@ namespace Kickstarter.Inputs
 
         private void OnEnable()
         {
+            if (inputReceivers == null)
+                return;
             foreach (var inputReceiver in inputReceivers)
                 inputReceiver.RegisterInputs(Identifier);
         }
 
         private void OnDisable()
         {
+            if (inputReceivers == null)
+                return;
             foreach (var inputReceiver in inputReceivers)
                 inputReceiver.DeregisterInputs(Identifier);
         }

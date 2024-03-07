@@ -13,7 +13,7 @@ namespace Dodge_Bots
         #region UnityEvents
         private void Awake()
         {
-            TrampolineManager.AddTrampoline(transform.position, this);
+            //TrampolineManager.AddTrampoline(transform.position, this);
         }
 
         private void Start()

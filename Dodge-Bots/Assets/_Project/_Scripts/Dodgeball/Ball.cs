@@ -1,4 +1,5 @@
-﻿using Kickstarter.Observer;
+﻿using Cinemachine;
+using Kickstarter.Observer;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -52,7 +53,7 @@ namespace Dodge_Bots
         private void Awake()
         {
             body = GetComponentInParent<Rigidbody>();
-            var camera = Camera.main;
+            var camera = FindObjectOfType<CinemachineBrain>();
             directionSource = camera.transform;
         }
 

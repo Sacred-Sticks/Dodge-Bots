@@ -1,3 +1,4 @@
+using Kickstarter.Bootstrapper;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,14 +7,11 @@ namespace Kickstarter.Inputs
     /// <summary>
     /// Manages the initialization and enabling of input assets within the game.
     /// </summary>
-    public class InputManager : MonoBehaviour
+    public class InputManager : MonoBehaviour, IAwake
     {
         [SerializeField] private InputAsset[] inputObjects;
 
-        /// <summary>
-        /// Initializes the input assets using available devices and players.
-        /// </summary>
-        private void Awake()
+        public void Awake_()
         {
             InitializeInputs();
         }

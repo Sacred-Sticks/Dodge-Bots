@@ -36,7 +36,7 @@ namespace Kickstarter.Bootstrapper
                     continue;
 
                 var operation = SceneManager.LoadSceneAsync(sceneData.Reference.Path, LoadSceneMode.Additive);
-                operationGroup.Operations.Add(operation);
+                operationGroup.AddOperation(operation, sceneData.Name);
 
                 OnSceneLoaded.Invoke(sceneData.Name);
             }
@@ -81,7 +81,7 @@ namespace Kickstarter.Bootstrapper
                 var operation = SceneManager.UnloadSceneAsync(scene);
                 if (operation == null)
                     continue;
-                operationGroup.Operations.Add(operation);
+                operationGroup.AddOperation(operation);
 
                 OnSceneUnloaded.Invoke(scene);
             }
