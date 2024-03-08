@@ -1,5 +1,4 @@
-﻿using Kickstarter.Bootstrapper;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Dodge_Bots
 {
