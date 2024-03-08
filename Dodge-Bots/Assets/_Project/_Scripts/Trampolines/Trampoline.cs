@@ -10,6 +10,8 @@ namespace Dodge_Bots
         [SerializeField] private float bounceMultiplier;
 
         private float jumpVelocity;
+
+        private const float maxMagnitude = 15f;
         
         #region UnityEvents
         public void Start()
@@ -28,6 +30,7 @@ namespace Dodge_Bots
         public void Bounce(Rigidbody body, Vector3 collisionVelocity)
         {
             var velocity = Vector3.Project(collisionVelocity, transform.up);
+            velocity = Vector3.ClampMagnitude(velocity, maxMagnitude);
             body.AddForce(velocity * bounceMultiplier, ForceMode.VelocityChange);
         }
         #endregion
