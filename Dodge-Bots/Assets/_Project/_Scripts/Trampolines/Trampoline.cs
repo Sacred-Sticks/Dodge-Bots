@@ -28,7 +28,7 @@ namespace Dodge_Bots
 
         public void Bounce(Rigidbody body, Vector3 collisionVelocity)
         {
-            var velocity = Vector3.Project(collisionVelocity, transform.up);
+            var velocity = collisionVelocity.magnitude * transform.up;
             velocity = Vector3.ClampMagnitude(velocity, maxMagnitude);
             body.AddForce(velocity * bounceMultiplier, ForceMode.VelocityChange);
         }

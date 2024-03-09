@@ -27,6 +27,7 @@ namespace Dodge_Bots
                 OnChargeChange?.Invoke(ballCharge / MaxCharge);
             }
         }
+        private bool recharging;
         private bool decharging;
         private Coroutine chargeRoutine;
 
@@ -42,7 +43,7 @@ namespace Dodge_Bots
                     StopCoroutine(chargeRoutine);
                     decharging = false;
                 }
-                if (charge != null)
+                if (charge != null && !recharging)
                     chargeRoutine = StartCoroutine(charge());
             }
         }
@@ -75,6 +76,7 @@ namespace Dodge_Bots
         private IEnumerator Decharge()
         {
             decharging = true;
+            recharging = false;
             while (BallCharge > 0)
             {
                 BallCharge -= Time.deltaTime * dechargeRate;
@@ -86,6 +88,8 @@ namespace Dodge_Bots
 
         private IEnumerator Recharge()
         {
+            recharging = true;
+            decharging = false;
             yield return new WaitForSeconds(deadTime);
             while (BallCharge < maxCharge)
             {
@@ -93,6 +97,7 @@ namespace Dodge_Bots
                 yield return new WaitForSeconds(Time.deltaTime);
             }
             BallCharge = maxCharge;
+            recharging = false;
         }   
     }
 }
